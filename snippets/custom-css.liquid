@@ -1,0 +1,33 @@
+<style>
+html:not(.xh) .template-index .mosaic__item__image img{
+    opacity: 0 !important
+}
+html:not(.scld) .loading-overlay {
+  display: none !important
+}
+html:not(.scld) .lazy-image img.is-loading {
+  opacity: 1 !important;
+}
+html:not(.scld) .announcement__scale.ticker--unloaded {
+    opacity: 1 !important;
+    position: unset !important;
+    width: unset !important;
+}
+
+html:not(.xh) .template-collection .collection__products .product-grid-item:nth-child(n+5) img{
+    opacity:0 !important;
+}
+@media (max-width:767px){
+html:not(.scld) .template-product .product-gallery__media-slider:not(.flickity-enabled) .product-gallery__media-slide:nth-child(n+2) {
+    display: none !important;
+}
+  html:not(.xh) .template-list-collections .grid__container .list-collections__item:nth-child(n+2) img{
+    opacity:0 !important;
+}
+}
+html:not(.mainopt):not(.xh), html:not(.mainopt):not(.xh) * {
+        transition: none !important;
+        animation: none !important;    
+        font-family: unset !important;
+    }
+</style>

@@ -100,7 +100,7 @@
     <figure class="{{ wrapper_classes }}">
   {%- endunless -%}
 
-    {{ image | image_url: width: width, height: height | image_tag: loading: loading, sizes: sizes, alt: alt, fetchpriority: fetchpriority, preload: preload, srcset: srcset, class: image_classes, style: image_styles, data-product-image: image_data, data-image-id: id }}
+    {{ image | image_url: width: width, height: height | image_tag: loading: loading, sizes: sizes, alt: alt, fetchpriority: fetchpriority, srcset: srcset, class: image_classes, style: image_styles, data-product-image: image_data, data-image-id: id }}
 
   {%- unless simple -%}
     </figure>

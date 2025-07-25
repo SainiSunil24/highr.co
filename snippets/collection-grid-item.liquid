@@ -259,7 +259,7 @@
             endif
           endcapture
 
-          render 'image-fill', is_background: true, img_object: image, sizes: sizes, aspect_ratio: aspect_ratio, classes: item_bg_class, placeholder_svg: placeholder_svg
+          render 'lazy-image-fill', is_background: true, img_object: image, sizes: sizes, aspect_ratio: aspect_ratio, classes: item_bg_class, placeholder_svg: placeholder_svg
         -%}
       {%- else -%}
         <div class="background-size-cover {{ item_bg_class }}"></div>

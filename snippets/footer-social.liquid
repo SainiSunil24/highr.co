@@ -62,7 +62,7 @@
       data-text="{{ color_text }}"
       data-hover="{{ color_text | color_modify: 'alpha', 0.50 }}"
     >
-      {{ shop | login_button: action: 'follow' }}
+      {{ shop | login_button: action: 'follow' | replace: 'defer="defer" async type="module" src=', 'dxt="module" type="load" d-src=' | replace: '<script type="module">', '<script dxt="module" type="load">' }}
     </div>
   {%- endif -%}
 </div>

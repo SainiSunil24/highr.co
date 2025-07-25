@@ -153,6 +153,7 @@
         {{ image | image_url: width: width, height: height | image_tag:
           loading: loading,
           fetchpriority: fetchpriority,
+          preload: preload,
           sizes: sizes,
           srcset: srcset_desktop,
           alt: alt,
@@ -167,10 +168,11 @@
         {{ image | image_url: width: width, height: height | image_tag:
           loading: loading,
           fetchpriority: fetchpriority,
+          preload: preload,
           sizes: sizes,
           srcset: srcset,
           alt: alt,
-          class: 'is-loading'
+          class: 'is-loading' | replace: ' src="' , ' src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" data-li="st" d-src="' | replace: ' srcset="' , ' dt="' 
         }}
       </figure>
     {%- endif -%}

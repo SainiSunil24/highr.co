@@ -1,0 +1,83 @@
+<div id="shopify-block-Aajk0TllTV2lJZTdoT__15683396631634586217" class="shopify-block shopify-app-block"><script
+  id="chat-button-container"
+  data-horizontal-position=bottom_right
+  data-vertical-position=lowest
+  data-icon=chat_bubble
+  data-text=chat_with_us
+  data-color=#000000
+  data-secondary-color=#ffffff
+  data-ternary-color=#6a6a6a
+  
+  data-domain=highr.co
+  data-shop-domain=highr.co
+  data-external-identifier=B_EFDjMegy8ATLj-JHjpJvQmTblYcCUTY7FSD2yFb1I
+  
+>
+</script>
+
+
+</div>
+
+<script>
+    var site_nav_link_burger = true;
+    var site_nav_link_search = true;
+    var site_nav_link_cart = true;
+    var site_atc = true;
+    document.addEventListener("DOMContentLoaded", function() {
+        var icon_menu = document.querySelector('[data-mobile-menu-trigger]');
+        var icon_search = document.querySelector('.menu__item--icons .search-popdown .navlink--icon .icon-search ');
+        var icon_cart = document.querySelector('[data-cart-drawer-toggle]');
+        var icon_atc = document.querySelector('[data-add-to-cart]');
+        if(icon_menu){
+          icon_menu.addEventListener("click", function() {
+              if(site_nav_link_burger && !document.documentElement.classList.contains('scld')) {
+                  event.preventDefault();
+                  site_nav_link_burger = false;
+              }
+          });
+        }
+        if(icon_search){
+          icon_search.addEventListener("click", function() {
+              if(site_nav_link_search && !document.documentElement.classList.contains('scld')) {
+                  event.preventDefault();
+                  site_nav_link_search = false;
+              }
+          });
+        }
+        if(icon_cart){
+          icon_cart.addEventListener("click", function() {
+              if(site_nav_link_cart && !document.documentElement.classList.contains('scld')) {
+                  event.preventDefault();
+                  site_nav_link_cart = false;
+              }
+          });
+        }
+      if(icon_atc){
+          icon_atc.addEventListener("click", function() {
+              if(site_atc && !document.documentElement.classList.contains('scld')) {
+                  event.preventDefault();
+                  site_atc = false;
+              }
+          });
+        }
+      
+    }) 
+</script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const startinterval = setInterval(() => {
+        if (!document.documentElement.classList.contains("xh") && document.documentElement.classList.contains("mainopt")) {
+            const mouseMoveEvent = new MouseEvent('mousemove', {
+                bubbles: true,
+                cancelable: true,
+                clientX: 100,
+                clientY: 150
+            });
+            document.dispatchEvent(mouseMoveEvent);
+        } else {
+            clearInterval(startinterval);
+            console.log("stoped")
+        }
+    }, 100);
+});
+</script>

@@ -1,6 +1,10 @@
+{% capture lazyloadcss %}
 <!doctype html>
 <html class="no-js no-touch page-loading" lang="{{ request.locale.iso_code }}">
-<head><meta charset="utf-8">
+<head>
+  {% render 'head-content' %}
+  
+  <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, minimum-scale=1.0">
 <link rel="canonical" href="{{ canonical_url }}">
@@ -39,7 +43,16 @@
 
   .loading-overlay { position: fixed; top: 0; left: 0; z-index: 99999; width: 100vw; height: 100vh; display: flex; align-items: center; justify-content: center; background: var(--overlay-bg, var(--COLOR-BLACK-WHITE)); }
 {%- endstyle -%}
-
+  
+{%- if request.design_mode or template contains 'cart' or template contains 'checkout' -%}
+  {{ content_for_header }}
+{%- else -%}
+  {% capture content_for_header2 %}{{ content_for_header }}{% endcapture %}
+  {{ content_for_header2 | replace: ' async="async" ', ' type="load" ' | replace: ' defer="defer" ', ' type="load" ' | replace: " src=", " d-src=" | replace: "DOMContentLoaded", "xDOMContentLoaded" | replace: "window.addEventListener('load', asyncLoad, false);", "window.addEventListener('xDOMContentLoaded', asyncLoad, false);" | replace: "addEventListener('load', prefetchAssets);", "addEventListener('xDOMContentLoaded', prefetchAssets);" | replace: "type='text/javascript' async=''", "type='load' " | replace: 'type="module" d-', 'dxt="module" type="load" d-' | replace: 'async dxt="module" type="load"', 'dxt="module"' | replace: '<script type="module">', '<script dxt="module" type="load">' | replace: "type='text/javascript' defer='defer' d-src", "type='load' d-src" | replace: '<script>', '<script type="load">' | replace: 'type="load" d-src="https://shop.app/checkouts/internal/preloads.js', 'type="lload" d-src="https://shop.app/checkouts/internal/preloads.js' }}
+  <script>
+    var trekkie=[];trekkie.integrations=!0;window.BOOMR={},window.BOOMR.version=true;
+  </script>
+  
 {%- unless loading_appearance == 'never' -%}
   {%- if image != blank -%}
     {%- assign image_height = image_width | divided_by: image.aspect_ratio | round -%}
@@ -81,7 +94,9 @@
   {% if current_page != 1 %} &ndash; {{ 'general.meta.page' | t: page: current_page }}{% endif %}
   {% unless page_title contains shop.name %} &ndash; {{ shop.name -}}{% endunless -%}
 </title>
+  
 
+{%- endif -%}
 {%- if page_description -%}
   <meta name="description" content="{{ page_description | escape }}">
 {%- else -%}
@@ -91,7 +106,19 @@
 {%- render 'social-meta-tags' -%}
 
 {%- render 'css-variables' -%}
-
+{% if template contains "index" %}
+    {% render "index-css" %}
+{% elsif template contains "collection" %}
+    {% if template contains "list-collection" %}
+        {% render 'list-collection-css' %}
+    {% else %}
+        {% render "collection-css" %}
+    {% endif %}
+{% elsif template contains "product" %}
+    {% render "product-css" %}
+{% else %}
+    {% render "all-css" %}
+{% endif %}
 {%- comment -%} CSS {%- endcomment -%}
 {{- 'theme.css' | asset_url | stylesheet_tag -}}
 
@@ -102,7 +129,7 @@
 -%}
 
 <script
-  type="text/javascript"
+  type="load"
 >
     if (window.MSInputMethodContext && document.documentMode) {
       var scripts = document.getElementsByTagName('script')[0];
@@ -225,8 +252,8 @@
   <script src="{{ 'shopify_common.js' | shopify_asset_url }}" defer="defer"></script>
 {%- endif -%}
 
-<script src="{{ 'vendor.js' | asset_url }}" defer="defer"></script>
-<script src="{{ 'theme.js' | asset_url }}" defer="defer"></script>
+<script type="load" d-src="{{ 'vendor.js' | asset_url }}"></script>
+<script type="load" d-src="{{ 'theme.js' | asset_url }}"></script>
 
 {%- if request.design_mode -%}
   <script
@@ -248,7 +275,11 @@
   <script src="{{ 'theme.dev.js' | asset_url }}" defer="defer"></script>
 {%- endcomment -%}
 
-{{ content_for_header }}
+
+
+  {% render 'app-block' %}
+  {% render 'custom-css' %}
+  
 </head>{%- capture body_classes -%}
 template-{{ template | replace: '.', ' ' | truncatewords: 1, '' | handle }}
 {% if customer %} customer-logged-in{% endif %}
@@ -292,6 +323,9 @@ template-{{ template | replace: '.', ' ' | truncatewords: 1, '' | handle }}
   <!-- Paste marketing code or third party scripts below this comment line ============== -->
 
   <!-- And above this comment line ================================================== -->
+  {% render 'footer-app-block' %}
+  {% render 'foot-content' %}
 
 </body>
 </html>
+{% endcapture %}{% if template contains "index" or template contains "collection" or template contains "product" %}{{ lazyloadcss | replace: '<link href="', '<link d-href="' | replace: '<link rel="stylesheet" href="', '<link rel="stylesheet" d-href="' }}{% else %}{{ lazyloadcss }}{% endif %} 

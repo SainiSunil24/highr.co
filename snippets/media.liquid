@@ -77,7 +77,7 @@
       assign is_simple_img = true
     endif
 
-    render 'image', image: media.preview_image, simple: is_simple_img, widths: image_widths, sizes: sizes, loading: loading, fetchpriority: fetchpriority, preload: preload, id: image_id, alt: image_alt
+    render 'image', image: media.preview_image, simple: is_simple_img, widths: image_widths, sizes: sizes, loading: loading, fetchpriority: fetchpriority, id: image_id, alt: image_alt
   endcapture
 
   capture media_display

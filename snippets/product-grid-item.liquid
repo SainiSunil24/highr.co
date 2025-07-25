@@ -273,7 +273,7 @@
               data-grid-image
             {%- endcapture -%}
 
-            {%- render 'image-fill',
+            {%- render 'lazy-image-fill',
               cover: image_cover,
               is_background: true,
               img_object: image,
@@ -282,7 +282,6 @@
               aspect_ratio: aspect_ratio,
               loading: loading,
               fetchpriority: fetchpriority,
-              preload: preload,
               classes: 'product__media product__media--featured-visible' -%}
 
             {%- if has_colors -%}
@@ -374,7 +373,7 @@
             class="product__media__hover product__media__hover--{{ product_grid_hover_animation }}"
             {% if has_colors %} data-deferred-container="[data-product-block]" data-deferred-triggers="[data-deferred-trigger-element]"{% endif %}
           >
-            {%- render 'image-fill',
+            {%- render 'lazy-image-fill',
               cover: image_cover,
               is_background: true,
               img_object: image,
